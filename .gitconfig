@@ -1,0 +1,37 @@
+[include]
+	path = ~/.gitconfig.local
+
+[core]
+	excludesfile = ~/.gitignore_global
+	quotepath = false
+
+[alias]
+	sttaus = status
+	l = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue)<%an>%Creset' --abbrev-commit
+	s = status -s
+	# `git di $number` shows the diff between the state `$number` revisions ago and the current state
+	di = !"d() { git diff --patch-with-stat HEAD~$1; }; git diff-index --quiet HEAD -- || clear; d"
+
+	assume   = update-index --assume-unchanged
+	unassume = update-index --no-assume-unchanged
+	assumed  = "!git ls-files -v | grep ^h | cut -c 3-"
+
+[color]
+	ui = auto
+[color "diff"]
+	meta = yellow bold
+	frag = magenta bold
+	old = red bold
+	new = green bold
+[color "status"]
+	added = yellow
+	changed = green
+	untracked = cyan
+
+[diff]
+	algorithm = patience
+
+[push]
+	default = simple
+[status]
+	submoduleSummary = true

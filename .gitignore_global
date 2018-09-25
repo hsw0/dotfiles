@@ -1,0 +1,18 @@
+.DS_Store
+[Tt]humbs.db
+
+*.bak
+nohup.out
+
+.*.sw[a-p]
+.sw[a-p]
+
+/tags
+/cscope.out
+
+/.ropeproject
+.ipynb_checkpoints
+
+### IntelliJ ###
+/.idea/
+*.iml
