@@ -88,4 +88,5 @@ elif shell_is_linux ; then
     alias ls='ls --color'
 fi
 
+( command -v jenv >& /dev/null ) && eval "$(jenv init -)"
 
