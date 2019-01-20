@@ -1,0 +1,14 @@
+#!/bin/bash
+
+pyscript='import yaml,json,sys;json.dump(yaml.safe_load(sys.stdin), sys.stdout, indent=2)'
+
+if python3 -c 'import yaml' 2> /dev/null ; then
+ python3 -c "$pyscript"
+elif python -c 'import yaml' 2> /dev/null ; then
+ python -c  "$pyscript"
+elif ruby -rjson -ryaml -e '' 2> /dev/null ; then
+ ruby -r json -r yaml -e "puts JSON.pretty_generate(YAML.load(ARGF.read))"
+else
+ echo "No yaml parser available." >&2
+ exit 1
+fi
