@@ -10,7 +10,7 @@ export PAGER=less
 [[ -d "$HOME/bin" ]] && export PATH="$PATH:$HOME/bin"
 [[ -d "$HOME/.cargo/bin" ]] && export PATH="$PATH:$HOME/.cargo/bin"
 
-umask 022
+umask 077
 
 
 export GREP_OPTIONS='--color=auto'
