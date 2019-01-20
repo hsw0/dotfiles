@@ -1,0 +1,50 @@
+#!/bin/bash
+
+# Prevent important config file being changed silently. (for security reason)
+#
+
+set -eu
+
+if [[ shell_is_osx ]]; then
+ lock_cmd="chflags -v uimmutable"
+ unlock_cmd="chflags -v nouimmutable"
+else
+ echo "Not yet." >&2
+ exit 1
+fi
+
+op=${1:-}
+
+if [[ "$op" == "lock" ]]; then
+ cmd="$lock_cmd"
+elif [[ "$op" == "unlock" ]]; then
+ cmd="$unlock_cmd"
+else
+ echo "Usage: $0 (lock|unlock)" >&2
+ exit 1
+fi
+
+
+cd "$HOME"
+
+# Well-known paths
+FILES=()
+FILES+=(.bashrc .bash_profile .profile)  # For obvious reason
+FILES+=(.gitconfig)
+FILES+=(.ssh/config)  # LocalCommand, ProxyCommand, PKCS11Provider, Forward*
+FILES+=(.gnupg/*.conf)  # pinentry-program, pcsc-driver, ...
+FILES+=(.vimrc)
+FILES+=(.tmux.conf)
+
+# Personal.
+# endless blacklisting...
+FILES+=(bin/lock_config)
+FILES+=(bin/scdreset)
+FILES+=(.gitconfig.local)
+FILES+=(.ssh/conf.d .ssh/conf.d/*)
+FILES+=(.dotfiles/config .dotfiles/hooks .dotfiles/hooks/*)
+
+for path in "${FILES[@]}" ; do
+ $cmd "$path" || echo ": failed."
+done
+
