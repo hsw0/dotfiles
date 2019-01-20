@@ -8,6 +8,7 @@ export EDITOR=vim
 export PAGER=less
 
 [[ -d "$HOME/bin" ]] && export PATH="$PATH:$HOME/bin"
+[[ -d "$HOME/.cargo/bin" ]] && export PATH="$PATH:$HOME/.cargo/bin"
 
 umask 022
 
