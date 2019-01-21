@@ -8,6 +8,9 @@ export EDITOR=vim
 export PAGER=less
 
 export LANG=en_US.UTF-8
+export LC_NUMERIC=ko_KR.UTF-8
+export LC_TIME=ko_KR.UTF-8
+export LC_MONETARY=ko_KR.UTF-8
 unset LC_CTYPE
 
 [[ -d "$HOME/bin" ]] && export PATH="$PATH:$HOME/bin"
