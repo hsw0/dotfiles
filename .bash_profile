@@ -7,6 +7,9 @@
 export EDITOR=vim
 export PAGER=less
 
+export LANG=en_US.UTF-8
+unset LC_CTYPE
+
 [[ -d "$HOME/bin" ]] && export PATH="$PATH:$HOME/bin"
 [[ -d "$HOME/.cargo/bin" ]] && export PATH="$PATH:$HOME/.cargo/bin"
 
@@ -26,9 +29,5 @@ if shell_is_osx ; then
 
     export HOMEBREW_NO_GITHUB_API=1
     export HOMEBREW_NO_AUTO_UPDATE=1
-
-    # Fix broken LC_CTYPE=UTF-8
-    export LC_CTYPE=$LANG
-
 fi
 
