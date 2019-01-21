@@ -13,6 +13,9 @@ nohup.out
 /.ropeproject
 .ipynb_checkpoints
 
+### jenv ###
+/.java-version
+
 ### IntelliJ ###
 /.idea/
 *.iml
