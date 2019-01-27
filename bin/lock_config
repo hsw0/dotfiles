@@ -42,6 +42,7 @@ FILES+=(bin/lock_config)
 FILES+=(bin/scdreset)
 FILES+=(.gitconfig.local)
 FILES+=(.ssh/conf.d .ssh/conf.d/*)
+FILES+=($XDG_CONFIG_HOME/vim/vimrc)
 FILES+=(.dotfiles/config .dotfiles/hooks .dotfiles/hooks/*)
 
 for path in "${FILES[@]}" ; do
