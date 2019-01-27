@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>PayloadContent</key>
+	<array>
+		<dict>
+			<key>PayloadDescription</key>
+			<string>Disable iCloud backup</string>
+			<key>PayloadDisplayName</key>
+			<string>제한사항</string>
+			<key>PayloadIdentifier</key>
+			<string>com.apple.applicationaccess.F4A264B4-AF8A-448A-A699-C63F922B8033</string>
+			<key>PayloadType</key>
+			<string>com.apple.applicationaccess</string>
+			<key>PayloadUUID</key>
+			<string>F4A264B4-AF8A-448A-A699-C63F922B8033</string>
+			<key>PayloadVersion</key>
+			<integer>1</integer>
+			<key>allowCloudBackup</key>
+			<false/>
+			<key>allowCloudKeychainSync</key>
+			<false/>
+		</dict>
+	</array>
+	<key>PayloadDisplayName</key>
+	<string>Disable iCloud backup</string>
+	<key>PayloadIdentifier</key>
+	<string>20972082-B776-482F-A640-B04DEB5B19C3</string>
+	<key>PayloadRemovalDisallowed</key>
+	<false/>
+	<key>PayloadType</key>
+	<string>Configuration</string>
+	<key>PayloadUUID</key>
+	<string>E7084714-97DA-41E5-9131-9A0CD6BBCA4B</string>
+	<key>PayloadVersion</key>
+	<integer>1</integer>
+</dict>
+</plist>
