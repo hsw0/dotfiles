@@ -1,0 +1,18 @@
+xrandr --output DP1 --primary --dpi 192
+xrandr --output HDMI1 --off
+
+#xrandr --output HDMI1 --left-of DP1
+#xrandr --output HDMI2 --right-of DP1
+
+export GDK_DPI_SCALE=1.5
+
+export XMODIFIERS=@im=uim
+export GTK_IM_MODULE=xim
+export QT_IM_MODULE=uim
+uim-xim &
+
+export TERMINAL=termite
+xautolock -corners '000+' -time 3 -locker 'i3lock --color=111111 --show-failed-attempts --pointer=default' &
+
+
+source ~/.bash_profile
