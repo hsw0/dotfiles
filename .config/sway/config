@@ -148,6 +148,10 @@ bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ '+5%' #in
 bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ '-5%' #decrease sound volume
 bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle # mute sound
 
+
+# Lock screen
+bindsym $mod+l exec 'swaylock --color=111111 --show-failed-attempts'
+
 # Logout/Shutdown/...
 set $mode_system System (e) logout, (s) suspend, (R) reboot, (S) shutdown
 mode "$mode_system" {
