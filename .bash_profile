@@ -25,8 +25,6 @@ export XDG_CACHE_HOME="${XDG_CACHE_HOME:-$HOME/.cache}"
 umask 077
 
 
-export GREP_OPTIONS='--color=auto'
-
 
 gpgconf --launch gpg-agent
 
