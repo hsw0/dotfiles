@@ -150,7 +150,14 @@ bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle # mute soun
 
 
 # Lock screen
-bindsym $mod+l exec 'swaylock --color=111111 --show-failed-attempts'
+set $swaylock '/usr/bin/swaylock --color=111111 --show-failed-attempts'
+bindsym $mod+l exec $swaylock
+
+exec swayidle -w \
+    timeout 120 $swaylock \
+    timeout 300 'swaymsg "output * dpms off"' \
+    resume 'swaymsg "output * dpms on"' \
+    before-sleep $swaylock
 
 # Logout/Shutdown/...
 set $mode_system System (e) logout, (s) suspend, (R) reboot, (S) shutdown
