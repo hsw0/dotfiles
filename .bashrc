@@ -35,11 +35,7 @@ COLOR_OFF=$'\e[0m'
 __prompt_command() {
     local color_cwd=$'\e[1;34m'
     PS1="\t \u@\h:${color_cwd}\w${COLOR_OFF}\n\$ "
-}
 
-# Use OSX Terminal.app defaults
-type -t update_terminal_cwd &> /dev/null ||
-update_terminal_cwd() {
     # If this is an xterm set the title to user@host:dir
     case "$TERM" in
         xterm*|rxvt*)
@@ -49,7 +45,7 @@ update_terminal_cwd() {
     esac
 }
 
-PROMPT_COMMAND="update_terminal_cwd;__prompt_command"
+PROMPT_COMMAND="__prompt_command${PROMPT_COMMAND:+; $PROMPT_COMMAND}"
 
 
 ERRCODE() {
