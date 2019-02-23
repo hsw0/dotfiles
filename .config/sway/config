@@ -162,10 +162,10 @@ exec swayidle -w \
 # Logout/Shutdown/...
 set $mode_system System (e) logout, (s) suspend, (R) reboot, (S) shutdown
 mode "$mode_system" {
-    bindsym e exec --no-startup-id i3-msg exit, mode "default"
-    bindsym s exec --no-startup-id xautolock -locknow && sleep 3 && systemctl suspend, mode "default"
-    bindsym Shift+r exec --no-startup-id systemctl reboot, mode "default"
-    bindsym Shift+s exec --no-startup-id systemctl poweroff, mode "default"
+    bindsym e exec i3-msg exit, mode "default"
+    bindsym s exec '$swaylock' --daemonize && sleep 3 && systemctl suspend, mode "default"
+    bindsym Shift+r exec systemctl reboot, mode "default"
+    bindsym Shift+s exec systemctl poweroff, mode "default"
 
     # back to normal: Enter or Escape
     bindsym Return mode "default"
