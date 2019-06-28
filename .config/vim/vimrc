@@ -109,3 +109,6 @@ nnoremap <leader>l :call ToggleLocationList()<CR>
 nnoremap  <leader>fs :call cscope#find('s', expand('<cword>'))<CR>
 " g: Find this definition
 nnoremap  <leader>fg :call cscope#find('g', expand('<cword>'))<CR>
+
+set modelines=0
+set nomodeline
