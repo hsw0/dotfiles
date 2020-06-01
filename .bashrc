@@ -36,6 +36,7 @@ __prompt_command() {
     local color_cwd=$'\e[1;34m'
     PS1="\t \u@\h:${color_cwd}\w${COLOR_OFF}"
 
+    [[ -n "${AWS_PROFILE-}" ]] &&  PS1+=" <aws:$AWS_PROFILE>"
     PS1+=" $(__git_prompt)"
 
     PS1+="\n\$ "
