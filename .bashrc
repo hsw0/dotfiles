@@ -34,7 +34,11 @@ COLOR_OFF=$'\e[0m'
 
 __prompt_command() {
     local color_cwd=$'\e[1;34m'
-    PS1="\t \u@\h:${color_cwd}\w${COLOR_OFF}\n\$ "
+    PS1="\t \u@\h:${color_cwd}\w${COLOR_OFF}"
+
+    PS1+=" $(__git_prompt)"
+
+    PS1+="\n\$ "
 
     # If this is an xterm set the title to user@host:dir
     case "$TERM" in
@@ -43,6 +47,24 @@ __prompt_command() {
             ;;
         *) ;;
     esac
+}
+
+
+__git_prompt() {
+  if [[ "$BASH_SUBSHELL" == 0 ]]; then
+    echo "__git_prompt: Run inside subshell" >&2
+    return
+  fi
+
+  while : ; do
+   [[ "$PWD" == '/' ]] && return
+   [[ -f "./.git/HEAD" ]] && break
+   cd ..
+  done
+
+  local refs=$(< "./.git/HEAD")
+  refs=${refs##*/}
+  echo '±' "$refs"
 }
 
 PROMPT_COMMAND="__prompt_command${PROMPT_COMMAND:+; $PROMPT_COMMAND}"
