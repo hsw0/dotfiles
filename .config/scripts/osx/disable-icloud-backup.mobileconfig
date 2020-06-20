@@ -6,9 +6,9 @@
 	<array>
 		<dict>
 			<key>PayloadDescription</key>
-			<string>Disable iCloud backup</string>
+			<string>Configures restrictions</string>
 			<key>PayloadDisplayName</key>
-			<string>제한사항</string>
+			<string>Restrictions</string>
 			<key>PayloadIdentifier</key>
 			<string>com.apple.applicationaccess.F4A264B4-AF8A-448A-A699-C63F922B8033</string>
 			<key>PayloadType</key>
@@ -18,8 +18,6 @@
 			<key>PayloadVersion</key>
 			<integer>1</integer>
 			<key>allowCloudBackup</key>
-			<false/>
-			<key>allowCloudKeychainSync</key>
 			<false/>
 		</dict>
 	</array>

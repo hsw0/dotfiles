@@ -6,9 +6,9 @@
 	<array>
 		<dict>
 			<key>PayloadDescription</key>
-			<string>Disable camer</string>
+			<string>Configures restrictions</string>
 			<key>PayloadDisplayName</key>
-			<string>제한사항</string>
+			<string>Restrictions</string>
 			<key>PayloadIdentifier</key>
 			<string>com.apple.applicationaccess.62539015-A19C-4222-9269-0E4CCA31DD75</string>
 			<key>PayloadType</key>

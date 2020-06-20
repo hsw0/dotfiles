@@ -6,9 +6,9 @@
 	<array>
 		<dict>
 			<key>PayloadDescription</key>
-			<string>Disable iCloud Photo</string>
+			<string>Configures restrictions</string>
 			<key>PayloadDisplayName</key>
-			<string>제한사항</string>
+			<string>Restrictions</string>
 			<key>PayloadIdentifier</key>
 			<string>com.apple.applicationaccess.9DFAC28D-F379-4752-88C7-1A83B569D5CB</string>
 			<key>PayloadType</key>
@@ -17,14 +17,12 @@
 			<string>9DFAC28D-F379-4752-88C7-1A83B569D5CB</string>
 			<key>PayloadVersion</key>
 			<integer>1</integer>
-			<key>allowCloudPhotoLibrary</key>
-			<false/>
 			<key>allowPhotoStream</key>
 			<false/>
 		</dict>
 	</array>
 	<key>PayloadDisplayName</key>
-	<string>Disable iCloud Photo</string>
+	<string>Disable iCloud Photo stream</string>
 	<key>PayloadIdentifier</key>
 	<string>6FC015E1-90F8-4258-BDC7-323000CDB88F</string>
 	<key>PayloadRemovalDisallowed</key>
