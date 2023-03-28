@@ -30,11 +30,21 @@ if [ -f "/usr/local/etc/bash_completion" ]; then
     source "/usr/local/etc/bash_completion"
 fi
 
-COLOR_OFF=$'\e[0m'
+readonly COLOR_OFF=$'\e[0m'
 
 __prompt_command() {
-    local color_cwd=$'\e[1;34m'
-    PS1="\t \u@\h:${color_cwd}\w${COLOR_OFF}"
+    local -r color_cwd=$'\e[1;34m'
+
+    PS1=""
+
+    local COL
+    local ROW
+    IFS=';' read -sdR -p $'\E[6n' ROW COL
+
+    (( COL > 1 )) && PS1+="\n"
+
+
+    PS1+="\t \u@\h:\[${color_cwd}\]\w\[${COLOR_OFF}\]"
 
     [[ -n "${VIRTUAL_ENV-}" ]] &&  PS1+=" <venv:$(basename "$VIRTUAL_ENV")>"
     [[ -n "${AWS_PROFILE-}" ]] &&  PS1+=" <aws:$AWS_PROFILE>"
