@@ -25,11 +25,6 @@ export XDG_CACHE_HOME="${XDG_CACHE_HOME:-$HOME/.cache}"
 umask 077
 
 
-
-gpgconf --launch gpg-agent
-
-export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
-
 if shell_is_osx ; then
     export CLICOLOR=1
 
