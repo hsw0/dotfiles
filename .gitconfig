@@ -33,9 +33,11 @@
 	untracked = cyan
 
 [diff]
-	algorithm = patience
+	algorithm = histogram
 
 [push]
 	default = simple
 [status]
 	submoduleSummary = true
+[help]
+	autocorrect = 1

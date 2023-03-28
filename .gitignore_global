@@ -19,3 +19,5 @@ nohup.out
 ### IntelliJ ###
 /.idea/
 *.iml
+
+/.vscode/
