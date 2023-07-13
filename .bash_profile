@@ -32,3 +32,5 @@ if shell_is_osx ; then
     export HOMEBREW_NO_AUTO_UPDATE=1
 fi
 
+export DOTNET_CLI_TELEMETRY_OPTOUT=1
+
