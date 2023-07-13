@@ -5,7 +5,9 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-alias dfgit='git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+# From bashrc_dispatch
+shell_is_linux () { [[ "$OSTYPE" == *'linux'* ]] ; }
+shell_is_osx () { [[ "$OSTYPE" == *'darwin'* ]] ; }
 
 # Don't use ^D to exit
 set -o ignoreeof
@@ -26,8 +28,18 @@ HISTTIMEFORMAT="%F %T  "
 HISTFILESIZE=
 HISTSIZE=
 
-if [ -f "/usr/local/etc/bash_completion" ]; then
-    source "/usr/local/etc/bash_completion"
+if shell_is_osx ; then
+    if [[ -x /opt/homebrew/bin/brew ]]; then
+        HOMEBREW_PREFIX="/opt/homebrew";
+    elif [[ -x /usr/local/Homebrew/bin/brew ]]; then
+        HOMEBREW_PREFIX="/usr/local";
+    fi
+
+fi
+
+
+if [ -r "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh" ]; then
+    source "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh"
 fi
 
 readonly COLOR_OFF=$'\e[0m'
@@ -90,12 +102,10 @@ ERRCODE() {
 trap ERRCODE ERR
 
 
-# From bashrc_dispatch
-shell_is_linux () { [[ "$OSTYPE" == *'linux'* ]] ; }
-shell_is_osx () { [[ "$OSTYPE" == *'darwin'* ]] ; }
-
-
 # Aliases
+
+# Managing .dotfiles
+alias dfgit='git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
 alias rm='rm -i'
 alias cp='cp -i'
@@ -113,9 +123,9 @@ pass() {
 
 
 if shell_is_osx ; then
-    alias openssl='/usr/local/opt/openssl/bin/openssl'
+    alias openssl="$HOMEBREW_PREFIX/opt/openssl/bin/openssl"
 
-    alias airport='/System/Library//PrivateFrameworks/Apple80211.framework/Versions/A/Resources/airport'
+    alias airport='/System/Library/PrivateFrameworks/Apple80211.framework/Versions/A/Resources/airport'
 elif shell_is_linux ; then
     alias ls='ls --color'
 fi

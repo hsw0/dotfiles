@@ -28,8 +28,16 @@ umask 077
 if shell_is_osx ; then
     export CLICOLOR=1
 
+    # Homebrew
     export HOMEBREW_NO_GITHUB_API=1
     export HOMEBREW_NO_AUTO_UPDATE=1
+
+    if [[ -x /opt/homebrew/bin/brew ]]; then
+        HOMEBREW_PREFIX="/opt/homebrew";
+        export PATH="$PATH:$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX:/sbin";
+        export MANPATH="$HOMEBREW_PREFIX/share/man${MANPATH+:$MANPATH}:";
+        export INFOPATH="$HOMEBREW_PREFIX/share/info:${INFOPATH:-}";
+    fi
 fi
 
 export DOTNET_CLI_TELEMETRY_OPTOUT=1
