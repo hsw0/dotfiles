@@ -87,7 +87,9 @@ __git_prompt() {
   done
 
   local refs=$(< "./.git/HEAD")
-  refs=${refs##*/}
+  refs=${refs/ref: /}
+
+  refs=${refs##refs/heads/}
   echo '±' "$refs"
 }
 
