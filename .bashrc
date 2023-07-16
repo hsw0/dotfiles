@@ -5,6 +5,8 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
+[[ -f /etc/bashrc ]] && source /etc/bashrc
+
 # From bashrc_dispatch
 shell_is_linux () { [[ "$OSTYPE" == *'linux'* ]] ; }
 shell_is_osx () { [[ "$OSTYPE" == *'darwin'* ]] ; }
@@ -12,10 +14,9 @@ shell_is_osx () { [[ "$OSTYPE" == *'darwin'* ]] ; }
 # Don't use ^D to exit
 set -o ignoreeof
 
-# Use case-insensitive filename globbing
-shopt -s nocaseglob
+shopt -s nocaseglob # Use case-insensitive filename globbing
+shopt -s cdspell  # Autocorrect
 
-# Make bash append rather than overwrite the history on disk
 shopt -s histappend
 
 # Don't put duplicate lines in the history.
@@ -35,12 +36,11 @@ if shell_is_osx ; then
         HOMEBREW_PREFIX="/usr/local";
     fi
 
+
+    [[ -r "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh" ]] &&
+      source "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh"
 fi
 
-
-if [ -r "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh" ]; then
-    source "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh"
-fi
 
 readonly COLOR_OFF=$'\e[0m'
 
@@ -115,20 +115,12 @@ alias grep='grep --color=auto'
 
 alias vi=vim
 
-pass() {
-    [[ "$1" == "show" ]] && command -v scdreset >& /dev/null &&
-        scdreset > /dev/null
-    command pass $@
-}
-
-
 if shell_is_osx ; then
-    alias openssl="$HOMEBREW_PREFIX/opt/openssl/bin/openssl"
+    alias openssl="$HOMEBREW_PREFIX/bin/openssl"
 
     alias airport='/System/Library/PrivateFrameworks/Apple80211.framework/Versions/A/Resources/airport'
+    alias tailscale='/Applications/Tailscale.app/Contents/MacOS/Tailscale'
 elif shell_is_linux ; then
     alias ls='ls --color'
 fi
-
-( command -v jenv >& /dev/null ) && eval "$(jenv init -)"
 

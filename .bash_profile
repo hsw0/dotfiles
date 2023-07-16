@@ -2,8 +2,6 @@
 # ~/.bash_profile
 #
 
-[[ -f ~/.bashrc ]] && . ~/.bashrc
-
 export EDITOR=vim
 export PAGER=less
 
@@ -19,13 +17,18 @@ export XDG_DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"
 export XDG_CACHE_HOME="${XDG_CACHE_HOME:-$HOME/.cache}"
 
 
-[[ -d "$HOME/bin" ]] && export PATH="$PATH:$HOME/bin"
-[[ -d "$HOME/.cargo/bin" ]] && export PATH="$PATH:$HOME/.cargo/bin"
+[[ -d "$HOME/.cargo/bin" && ! "$PATH" =~ "$HOME/.cargo/bin" ]] &&
+    PATH="$HOME/.cargo/bin:$PATH"
+[[ -d "$HOME/bin" && ! "$PATH" =~ "$HOME/bin" ]] &&
+    PATH="$HOME/bin:$PATH"
+[[ -d "$HOME/.local/bin" && ! "$PATH" =~ "$HOME/.local/bin" ]] &&
+    PATH="$HOME/local/bin:$PATH"
 
-umask 077
-
+[[ -f ~/.bashrc ]] && . ~/.bashrc
 
 if shell_is_osx ; then
+    export BASH_SILENCE_DEPRECATION_WARNING=1
+
     export CLICOLOR=1
 
     # Homebrew
@@ -33,12 +36,13 @@ if shell_is_osx ; then
     export HOMEBREW_NO_AUTO_UPDATE=1
 
     if [[ -x /opt/homebrew/bin/brew ]]; then
-        HOMEBREW_PREFIX="/opt/homebrew";
-        export PATH="$PATH:$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX:/sbin";
+        export PATH="$PATH:$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin";
         export MANPATH="$HOMEBREW_PREFIX/share/man${MANPATH+:$MANPATH}:";
         export INFOPATH="$HOMEBREW_PREFIX/share/info:${INFOPATH:-}";
     fi
 fi
 
 export DOTNET_CLI_TELEMETRY_OPTOUT=1
+
+umask 077
 
