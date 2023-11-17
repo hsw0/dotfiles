@@ -11,7 +11,8 @@ export LANG=en_US.UTF-8
 export LC_NUMERIC=ko_KR.UTF-8
 export LC_TIME=ko_KR.UTF-8
 export LC_MONETARY=ko_KR.UTF-8
-unset LC_CTYPE
+export LC_COLLATE=C
+unset LC_ALL
 
 
 export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
@@ -47,6 +48,8 @@ if shell_is_osx ; then
         export MANPATH="$HOMEBREW_PREFIX/share/man${MANPATH+:$MANPATH}:";
         export INFOPATH="$HOMEBREW_PREFIX/share/info:${INFOPATH:-}";
     fi
+else
+    export LC_CTYPE=C.UTF-8
 fi
 
 export DOTNET_CLI_TELEMETRY_OPTOUT=1
