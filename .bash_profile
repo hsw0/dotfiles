@@ -45,6 +45,8 @@ if shell_is_osx ; then
     export HOMEBREW_CLEANUP_MAX_AGE_DAYS=7
     export HOMEBREW_CASK_OPTS="--no-quarantine"
 
+    alias airport='/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport'
+
     if [[ -x /opt/homebrew/bin/brew ]]; then
         export PATH="$PATH:$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin";
         export MANPATH="$HOMEBREW_PREFIX/share/man${MANPATH+:$MANPATH}:";
