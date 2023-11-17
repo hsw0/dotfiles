@@ -34,8 +34,13 @@ if shell_is_osx ; then
     export CLICOLOR=1
 
     # Homebrew
+    export HOMEBREW_NO_ANALYTICS=1
     export HOMEBREW_NO_GITHUB_API=1
+    export HOMEBREW_NO_INSTALL_UPGRADE=1
     export HOMEBREW_NO_AUTO_UPDATE=1
+    export HOMEBREW_CLEANUP_PERIODIC_FULL_DAYS=3
+    export HOMEBREW_CLEANUP_MAX_AGE_DAYS=7
+    export HOMEBREW_CASK_OPTS="--no-quarantine"
 
     if [[ -x /opt/homebrew/bin/brew ]]; then
         export PATH="$PATH:$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin";
