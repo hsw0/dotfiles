@@ -21,3 +21,5 @@ nohup.out
 *.iml
 
 /.vscode/
+
+/.venv/
