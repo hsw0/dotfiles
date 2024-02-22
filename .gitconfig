@@ -4,6 +4,19 @@
 [core]
 	excludesfile = ~/.gitignore_global
 	quotepath = false
+	autocrlf = input
+
+[color]
+	ui = auto
+[color "diff"]
+	meta = yellow bold
+	frag = magenta bold
+	old = red bold
+	new = green bold
+[color "status"]
+	added = yellow
+	changed = green
+	untracked = cyan
 
 [alias]
 	sttaus = status
@@ -20,24 +33,37 @@
 
 	rebaes = rebase
 
-[color]
-	ui = auto
-[color "diff"]
-	meta = yellow bold
-	frag = magenta bold
-	old = red bold
-	new = green bold
-[color "status"]
-	added = yellow
-	changed = green
-	untracked = cyan
+[help]
+	autocorrect = 1
+
+[status]
+	submoduleSummary = true
+
+[log]
+	date = iso-local
+
+[branch]
+	sort = -committerdate
+
+[tag]
+	sort = -version:refname
 
 [diff]
 	algorithm = histogram
 
+[merge]
+	conflictstyle = zdiff3
+
+[rebase]
+	autosquash = true
+
+[pull]
+	ff = only
 [push]
 	default = simple
-[status]
-	submoduleSummary = true
-[help]
-	autocorrect = 1
+
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
