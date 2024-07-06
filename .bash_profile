@@ -8,10 +8,9 @@ export LESS='--squeeze-blank-lines --RAW-CONTROL-CHARS --use-color'
 LESS+=' --color=d+39$--color=u+213$--color=s+y$--color=k+r'
 
 export LANG=en_US.UTF-8
-export LC_NUMERIC=ko_KR.UTF-8
-export LC_TIME=ko_KR.UTF-8
-export LC_MONETARY=ko_KR.UTF-8
 export LC_COLLATE=C
+export LC_NUMERIC=ko_KR.UTF-8
+export LC_MONETARY=ko_KR.UTF-8
 unset LC_ALL
 
 
@@ -34,6 +33,8 @@ export XDG_CACHE_HOME="${XDG_CACHE_HOME:-$HOME/.cache}"
 if shell_is_osx ; then
     export BASH_SILENCE_DEPRECATION_WARNING=1
 
+    export LC_TIME=ko_KR.UTF-8
+
     export CLICOLOR=1
 
     # Homebrew
@@ -54,6 +55,8 @@ if shell_is_osx ; then
     fi
 else
     export LC_CTYPE=C.UTF-8
+    export LC_TIME=en_DK.UTF-8
+    export TIME_STYLE=long-iso
 fi
 
 export DOTNET_CLI_TELEMETRY_OPTOUT=1
