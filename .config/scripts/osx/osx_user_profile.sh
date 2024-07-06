@@ -1,6 +1,11 @@
 #!/bin/bash
 
+set -eu -o pipefail
+
+main() {
+
 #
+# 현재 설정 추출: plutil -convert xml1 ~/Library/Preferences/<domain>.plist -o  /dev/stdout
 # 참고: 설정 목록:
 # https://mosen.github.io/profiledocs/pdp/mcx.html
 #
@@ -22,6 +27,9 @@ defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
 defaults write NSGlobalDomain NSAutomaticPeriodSubstitutionEnabled -bool true
 defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
 defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
+
+
+defaults write com.apple.AppleMultitouchTrackpad "clicking" -bool true
 
 ## UI
 
@@ -50,8 +58,33 @@ defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
 
 defaults write com.apple.NetworkBrowser DisableAirDrop -bool true
 
+defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
+
+
 
 # Disable resume system-wide
 defaults write NSGlobalDomain NSQuitAlwaysKeepsWindows -bool false
 defaults write com.apple.loginwindow TALLogoutSavesState -bool false
 defaults write com.apple.loginwindow LoginwindowLaunchesRelaunchApps -bool false
+
+
+# Screenshot: Remove background shadow
+defaults write com.apple.screencapture disable-shadow -bool true
+
+
+# 특정 애플리케이션 언어 강제 지정 - 날짜/시간 포멧팅 등등
+per_app_language_bundles=(com.apple.controlcenter com.apple.dock)
+defaults write NSGlobalDomain ApplePerAppLanguageSelectionBundleIdentifiers -array "${per_app_language_bundles[@]}"
+for bundle in "${per_app_language_bundles[@]}" ; do
+
+    defaults write "$bundle" AppleLanguages -array ko-KR en
+done
+
+#killall SystemUIServer ControlCenter Dock Finder
+
+return 0
+}
+
+main "$@"
+exit $?
+
