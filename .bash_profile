@@ -63,3 +63,5 @@ export DOTNET_CLI_TELEMETRY_OPTOUT=1
 
 umask 077
 
+[[ -f ~/.bash_profile.local ]] && . ~/.bash_profile.local
+
