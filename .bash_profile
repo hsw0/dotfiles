@@ -21,12 +21,12 @@ export XDG_STATE_HOME="${XDG_STATE_HOME:-$HOME/.local/state}"
 export XDG_CACHE_HOME="${XDG_CACHE_HOME:-$HOME/.cache}"
 
 
-[[ -d "$HOME/.cargo/bin" && ! "$PATH" =~ "$HOME/.cargo/bin" ]] &&
-    PATH="$HOME/.cargo/bin:$PATH"
 [[ -d "$HOME/bin" && ! "$PATH" =~ "$HOME/bin" ]] &&
     PATH="$HOME/bin:$PATH"
 [[ -d "$HOME/.local/bin" && ! "$PATH" =~ "$HOME/.local/bin" ]] &&
-    PATH="$HOME/local/bin:$PATH"
+    PATH="$HOME/.local/bin:$PATH"
+[[ -d "$HOME/.cargo/bin" && ! "$PATH" =~ "$HOME/.cargo/bin" ]] &&
+    PATH="$HOME/.cargo/bin:$PATH"
 
 [[ -f ~/.bashrc ]] && . ~/.bashrc
 
