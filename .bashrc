@@ -17,8 +17,6 @@ set -o ignoreeof
 shopt -s nocaseglob # Use case-insensitive filename globbing
 shopt -s cdspell  # Autocorrect
 
-shopt -s histappend
-
 # Don't put duplicate lines in the history.
 HISTCONTROL=$HISTCONTROL${HISTCONTROL+,}ignoredups
 
@@ -28,6 +26,16 @@ HISTTIMEFORMAT="%F %T  "
 
 HISTFILESIZE=
 HISTSIZE=
+
+# https://johngrib.github.io/wiki/cmd/bash/history/
+function __sync_history {
+    history -a
+    history -c
+    history -r
+}
+PROMPT_COMMAND="__sync_history${PROMPT_COMMAND:+; $PROMPT_COMMAND}"
+shopt -u histappend
+
 
 if shell_is_osx ; then
     if [[ -x /opt/homebrew/bin/brew ]]; then
@@ -72,7 +80,6 @@ __prompt_command() {
         *) ;;
     esac
 }
-
 
 __git_prompt() {
   if [[ "$BASH_SUBSHELL" == 0 ]]; then
