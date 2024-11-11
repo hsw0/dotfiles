@@ -96,12 +96,23 @@ __git_prompt() {
 PROMPT_COMMAND="__prompt_command${PROMPT_COMMAND:+; $PROMPT_COMMAND}"
 
 
-ERRCODE() {
+__print_errcode() {
     local status=$?
     local color=$'\e[0;33m'
     echo -e "${color}code $status$COLOR_OFF"
 }
-trap ERRCODE ERR
+trap __print_errcode ERR
+
+ssh() {
+    # Update terminal title
+    case "$TERM" in
+        xterm*|rxvt*)
+            printf '\e]0;SSH\a'
+            ;;
+        *) ;;
+    esac
+    command ssh "$@"
+}
 
 
 # Aliases
