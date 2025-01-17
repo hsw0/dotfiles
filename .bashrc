@@ -109,6 +109,13 @@ __print_errcode() {
 }
 trap __print_errcode ERR
 
+_termfix() {
+    stty sane
+    tput init
+    tput cnorm  # Turn on cursor
+    #tput rmcup  # Switch back to primary page
+}
+
 ssh() {
     # Update terminal title
     case "$TERM" in
@@ -117,7 +124,7 @@ ssh() {
             ;;
         *) ;;
     esac
-    command ssh "$@"
+    command ssh "$@" || _termfix
 }
 
 
