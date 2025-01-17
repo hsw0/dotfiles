@@ -41,7 +41,7 @@ HISTFILESIZE=
 HISTSIZE=
 
 # https://johngrib.github.io/wiki/cmd/bash/history/
-function __sync_history {
+__sync_history() {
     history -a
     history -c
     history -r
@@ -65,8 +65,8 @@ __prompt_command() {
 
     PS1+="\t \u@\h:\[${color_cwd}\]\w\[${COLOR_OFF}\]"
 
-    [[ -n "${VIRTUAL_ENV-}" ]] &&  PS1+=" <venv:$(basename "$VIRTUAL_ENV")>"
-    [[ -n "${AWS_PROFILE-}" ]] &&  PS1+=" <aws:$AWS_PROFILE>"
+    [[ -n "${VIRTUAL_ENV-}" ]] && PS1+=" <venv:$(basename "$VIRTUAL_ENV")>"
+    [[ -n "${AWS_PROFILE-}" ]] && PS1+=" <aws:$AWS_PROFILE>"
     PS1+=" $(__git_prompt)"
 
     PS1+="\n\$ "
@@ -81,22 +81,22 @@ __prompt_command() {
 }
 
 __git_prompt() {
-  if [[ "$BASH_SUBSHELL" == 0 ]]; then
-    echo "__git_prompt: Run inside subshell" >&2
-    return
-  fi
+    if [[ "$BASH_SUBSHELL" == 0 ]]; then
+        echo "__git_prompt: Run inside subshell" >&2
+        return
+    fi
 
-  while : ; do
-   [[ "$PWD" == '/' ]] && return
-   [[ -f "./.git/HEAD" ]] && break
-   cd ..
-  done
+    while : ; do
+       [[ "$PWD" == '/' ]] && return
+       [[ -f "./.git/HEAD" ]] && break
+       cd ..
+    done
 
-  local refs=$(< "./.git/HEAD")
-  refs=${refs/ref: /}
+    local refs=$(< "./.git/HEAD")
+    refs=${refs/ref: /}
 
-  refs=${refs##refs/heads/}
-  echo '±' "$refs"
+    refs=${refs##refs/heads/}
+    echo '±' "$refs"
 }
 
 PROMPT_COMMAND="__prompt_command${PROMPT_COMMAND:+; $PROMPT_COMMAND}"
