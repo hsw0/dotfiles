@@ -4,8 +4,8 @@
 
 export EDITOR=vim
 export PAGER=less
-export LESS='--squeeze-blank-lines --RAW-CONTROL-CHARS --use-color'
-LESS+=' --color=d+39$--color=u+213$--color=s+y$--color=k+r'
+export LESS='--quit-if-one-screen --squeeze-blank-lines --RAW-CONTROL-CHARS'
+LESS+=' --use-color --color=d+39$--color=u+213$--color=s+y$--color=k+r'
 
 export LANG=en_US.UTF-8
 export LC_COLLATE=C
