@@ -11,6 +11,19 @@
 shell_is_linux () { [[ "$OSTYPE" == *'linux'* ]] ; }
 shell_is_osx () { [[ "$OSTYPE" == *'darwin'* ]] ; }
 
+# Homebrew bash completion
+if shell_is_osx ; then
+    if [[ -x /opt/homebrew/bin/brew ]]; then
+        HOMEBREW_PREFIX="/opt/homebrew";
+    elif [[ -x /usr/local/Homebrew/bin/brew ]]; then
+        HOMEBREW_PREFIX="/usr/local";
+    fi
+
+    [[ -r "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh" ]] &&
+      source "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh"
+fi
+
+
 # Don't use ^D to exit
 set -o ignoreeof
 
@@ -35,20 +48,6 @@ function __sync_history {
 }
 PROMPT_COMMAND="__sync_history${PROMPT_COMMAND:+; $PROMPT_COMMAND}"
 shopt -u histappend
-
-
-if shell_is_osx ; then
-    if [[ -x /opt/homebrew/bin/brew ]]; then
-        HOMEBREW_PREFIX="/opt/homebrew";
-    elif [[ -x /usr/local/Homebrew/bin/brew ]]; then
-        HOMEBREW_PREFIX="/usr/local";
-    fi
-
-
-    [[ -r "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh" ]] &&
-      source "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh"
-fi
-
 
 readonly COLOR_OFF=$'\e[0m'
 
