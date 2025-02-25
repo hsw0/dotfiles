@@ -120,7 +120,8 @@ ssh() {
     # Update terminal title
     case "$TERM" in
         xterm*|rxvt*)
-            printf '\e]0;SSH\a'
+            local ssh_host=$(command ssh -G "$@" | head -1 | cut -d' ' -f2) || true
+            printf '\e]0;%s\a' "${ssh_host-SSH}"
             ;;
         *) ;;
     esac
