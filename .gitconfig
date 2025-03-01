@@ -34,7 +34,7 @@
 	rebaes = rebase
 
 [help]
-	autocorrect = 1
+	autocorrect = prompt
 
 [status]
 	submoduleSummary = true
@@ -49,18 +49,29 @@
 	sort = -version:refname
 
 [diff]
+	mnemonicPrefix = true
 	algorithm = histogram
+	renames = copy
+[commit]
+	verbose = true
 
 [merge]
 	conflictstyle = zdiff3
 
 [rebase]
 	autosquash = true
+	autoStash = true
+	updateRefs = true
 
+[fetch]
+	prune = true
+	pruneTags = true
+	all = true
 [pull]
 	ff = only
 [push]
 	default = simple
+	autoSetupRemote = true
 
 [filter "lfs"]
 	clean = git-lfs clean -- %f
