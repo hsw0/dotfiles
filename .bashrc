@@ -20,7 +20,7 @@ if shell_is_osx ; then
     fi
 
     [[ -r "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh" ]] &&
-      source "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh"
+      source "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh" 2> /dev/null
 fi
 
 
