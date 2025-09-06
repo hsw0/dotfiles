@@ -11,6 +11,10 @@
 shell_is_linux () { [[ "$OSTYPE" == *'linux'* ]] ; }
 shell_is_osx () { [[ "$OSTYPE" == *'darwin'* ]] ; }
 
+_IS_IDE_TERMINAL=0
+[[ "${TERMINAL_EMULATOR:-}" == JetBrains* ]] && _IS_IDE_TERMINAL=1
+[[ "${TERM_PROGRAM:-}" == vscode* ]] && _IS_IDE_TERMINAL=1
+
 # Homebrew bash completion
 if shell_is_osx ; then
     if [[ -x /opt/homebrew/bin/brew ]]; then
@@ -56,11 +60,13 @@ __prompt_command() {
 
     PS1=""
 
-    local COL
-    local ROW
-    IFS=';' read -sdR -p $'\E[6n' ROW COL
+    if [[ "$_IS_IDE_TERMINAL" == "0" ]]; then
+      local COL
+      local ROW
+      IFS=';' read -sdR -p $'\E[6n' ROW COL
 
-    (( COL > 1 )) && PS1+="\n"
+      (( COL > 1 )) && PS1+="\n"
+    fi
 
 
     PS1+="\t \u@\h:\[${color_cwd}\]\w\[${COLOR_OFF}\]"
