@@ -7,16 +7,12 @@
 
 [[ -f /etc/bashrc ]] && source /etc/bashrc
 
-# From bashrc_dispatch
-shell_is_linux () { [[ "$OSTYPE" == *'linux'* ]] ; }
-shell_is_osx () { [[ "$OSTYPE" == *'darwin'* ]] ; }
-
 _IS_IDE_TERMINAL=0
 [[ "${TERMINAL_EMULATOR:-}" == JetBrains* ]] && _IS_IDE_TERMINAL=1
 [[ "${TERM_PROGRAM:-}" == vscode* ]] && _IS_IDE_TERMINAL=1
 
 # Homebrew bash completion
-if shell_is_osx ; then
+if [[ "$OSTYPE" == *'darwin'* ]] ; then
     if [[ -x /opt/homebrew/bin/brew ]]; then
         HOMEBREW_PREFIX="/opt/homebrew";
     elif [[ -x /usr/local/Homebrew/bin/brew ]]; then
@@ -148,12 +144,12 @@ alias grep='grep --color=auto'
 
 alias vi=vim
 
-if shell_is_osx ; then
+if [[ "$OSTYPE" == *'darwin'* ]]; then
     alias openssl="$HOMEBREW_PREFIX/bin/openssl"
 
     alias airport='/System/Library/PrivateFrameworks/Apple80211.framework/Versions/A/Resources/airport'
     alias tailscale='/Applications/Tailscale.app/Contents/MacOS/Tailscale'
-elif shell_is_linux ; then
+elif [[ "$OSTYPE" == *'linux'* ]]; then
     alias ls='ls --color'
 fi
 

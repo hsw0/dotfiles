@@ -30,7 +30,7 @@ export XDG_CACHE_HOME="${XDG_CACHE_HOME:-$HOME/.cache}"
 
 [[ -f ~/.bashrc ]] && . ~/.bashrc
 
-if shell_is_osx ; then
+if [[ "$OSTYPE" == *'darwin'* ]]; then
     export BASH_SILENCE_DEPRECATION_WARNING=1
 
     export LC_TIME=ko_KR.UTF-8
