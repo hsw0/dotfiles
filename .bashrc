@@ -86,17 +86,22 @@ __git_prompt() {
         return
     fi
 
+    pushd . > /dev/null
+    # defer execution until we are sure we are in a git repo
+    # sometimes, just running `git` is slow
+
     while : ; do
+       [[ -r "$PWD/.git" ]] && break
+       [[ ! -O "$PWD" ]] && return
        [[ "$PWD" == '/' ]] && return
-       [[ -f "./.git/HEAD" ]] && break
        cd ..
     done
+    popd > /dev/null
 
-    local refs=$(< "./.git/HEAD")
-    refs=${refs/ref: /}
-
-    refs=${refs##refs/heads/}
-    echo '±' "$refs"
+    local head
+    head="$(git symbolic-ref --quiet --short HEAD 2>/dev/null \
+         || git rev-parse --short HEAD 2>/dev/null)" || return
+    printf '± %s' "$head"
 }
 
 PROMPT_COMMAND="__prompt_command${PROMPT_COMMAND:+; $PROMPT_COMMAND}"
