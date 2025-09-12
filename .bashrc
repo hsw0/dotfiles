@@ -125,7 +125,7 @@ ssh() {
     # Update terminal title
     case "$TERM" in
         xterm*|rxvt*)
-            local ssh_host=$(command ssh -G "$@" | head -1 | cut -d' ' -f2) || true
+            local ssh_host="$(command ssh -G "$@" 2>/dev/null | awk 'tolower($1)=="hostname"{print $2; exit}')" || true
             printf '\e]0;%s\a' "${ssh_host-SSH}"
             ;;
         *) ;;
