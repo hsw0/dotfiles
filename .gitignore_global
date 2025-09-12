@@ -21,5 +21,6 @@ nohup.out
 *.iml
 
 /.vscode/
+*.code-workspace
 
 /.venv/
