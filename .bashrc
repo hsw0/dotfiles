@@ -40,14 +40,12 @@ HISTTIMEFORMAT="%F %T  "
 HISTFILESIZE=
 HISTSIZE=
 
-# https://johngrib.github.io/wiki/cmd/bash/history/
 __sync_history() {
     history -a
-    history -c
-    history -r
+    history -n
 }
 PROMPT_COMMAND="__sync_history${PROMPT_COMMAND:+; $PROMPT_COMMAND}"
-shopt -u histappend
+shopt -s histappend
 
 readonly COLOR_OFF=$'\e[0m'
 
