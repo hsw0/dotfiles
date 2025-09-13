@@ -7,10 +7,6 @@
 
 [[ -f /etc/bashrc ]] && source /etc/bashrc
 
-_IS_IDE_TERMINAL=0
-[[ "${TERMINAL_EMULATOR:-}" == JetBrains* ]] && _IS_IDE_TERMINAL=1
-[[ "${TERM_PROGRAM:-}" == vscode* ]] && _IS_IDE_TERMINAL=1
-
 # Homebrew bash completion
 if [[ "$OSTYPE" == *'darwin'* ]] ; then
     if [[ -x /opt/homebrew/bin/brew ]]; then
@@ -52,18 +48,19 @@ readonly COLOR_OFF=$'\e[0m'
 __prompt_command() {
     local -r color_cwd=$'\e[1;34m'
 
-    PS1=""
+    PS1="\t \u@\h:\[${color_cwd}\]\w\[${COLOR_OFF}\]"
 
-    if [[ "$_IS_IDE_TERMINAL" == "0" ]]; then
+    # Getting cursor position causes issue when IDE executes command in new terminal
+    if [[ -n "${__PC_SEEN-}"  ]]; then
       local COL
       local ROW
       IFS=';' read -sdR -p $'\E[6n' ROW COL
 
-      (( COL > 1 )) && PS1+="\n"
+      # After executing a command, if the cursor is not at the start of a new line,
+      # then move to a new line before printing the prompt.
+      (( COL > 1 )) && PS1="\n$PS1"
     fi
 
-
-    PS1+="\t \u@\h:\[${color_cwd}\]\w\[${COLOR_OFF}\]"
 
     if [[ -n "${VIRTUAL_ENV_PROMPT-}" ]]; then
         PS1+=" <venv:$VIRTUAL_ENV_PROMPT>"
@@ -86,6 +83,8 @@ __prompt_command() {
             ;;
         *) ;;
     esac
+
+    __PC_SEEN=1
 }
 
 __git_prompt() {
