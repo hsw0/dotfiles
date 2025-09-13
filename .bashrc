@@ -161,6 +161,6 @@ if [[ "$OSTYPE" == *'darwin'* ]]; then
     alias airport='/System/Library/PrivateFrameworks/Apple80211.framework/Versions/A/Resources/airport'
     alias tailscale='/Applications/Tailscale.app/Contents/MacOS/Tailscale'
 elif [[ "$OSTYPE" == *'linux'* ]]; then
-    alias ls='ls --color'
+    alias ls='ls --color=auto'
 fi
 
