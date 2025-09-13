@@ -65,8 +65,16 @@ __prompt_command() {
 
     PS1+="\t \u@\h:\[${color_cwd}\]\w\[${COLOR_OFF}\]"
 
-    [[ -n "${VIRTUAL_ENV-}" ]] && PS1+=" <venv:$(basename "$VIRTUAL_ENV")>"
-    [[ -n "${AWS_PROFILE-}" ]] && PS1+=" <aws:$AWS_PROFILE>"
+    if [[ -n "${VIRTUAL_ENV_PROMPT-}" ]]; then
+        PS1+=" <venv:$VIRTUAL_ENV_PROMPT>"
+    elif [[ -n "${VIRTUAL_ENV-}" ]]; then
+        PS1+=" <venv:$(basename "$VIRTUAL_ENV")>"
+     fi
+
+    if [[ -n "${AWS_PROFILE-}" ]]; then
+        PS1+=" <aws:$AWS_PROFILE>"
+    fi
+
     PS1+=" $(__git_prompt)"
 
     PS1+="\n\$ "
