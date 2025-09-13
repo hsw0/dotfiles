@@ -5,7 +5,9 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-[[ -f /etc/bashrc ]] && source /etc/bashrc
+if ! shopt -q login_shell; then
+    [[ -r /etc/bashrc ]] && source /etc/bashrc
+fi
 
 # Homebrew bash completion
 if [[ "$OSTYPE" == *'darwin'* ]] ; then
@@ -20,9 +22,7 @@ if [[ "$OSTYPE" == *'darwin'* ]] ; then
 fi
 
 
-# Don't use ^D to exit
-set -o ignoreeof
-
+set -o ignoreeof # Don't use ^D to exit
 shopt -s nocaseglob # Use case-insensitive filename globbing
 shopt -s cdspell  # Autocorrect
 

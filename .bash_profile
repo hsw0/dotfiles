@@ -33,7 +33,7 @@ export XDG_CACHE_HOME="${XDG_CACHE_HOME:-$HOME/.cache}"
 if [[ "$OSTYPE" == *'darwin'* ]]; then
     export BASH_SILENCE_DEPRECATION_WARNING=1
 
-    export LC_TIME=ko_KR.UTF-8
+    #export LC_TIME=ko_KR.UTF-8  # strange.. ex) date: "#오후"
 
     export CLICOLOR=1
 
