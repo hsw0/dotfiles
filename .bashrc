@@ -9,6 +9,11 @@ if ! shopt -q login_shell; then
     [[ -r /etc/bashrc ]] && source /etc/bashrc
 fi
 
+
+_IS_IDE_TERMINAL=0
+[[ "${TERMINAL_EMULATOR:-}" == JetBrains* ]] && _IS_IDE_TERMINAL=1
+[[ "${TERM_PROGRAM:-}" == vscode* ]] && _IS_IDE_TERMINAL=1
+
 # Homebrew bash completion
 if [[ "$OSTYPE" == *'darwin'* ]] ; then
     if [[ -x /opt/homebrew/bin/brew ]]; then
@@ -51,7 +56,7 @@ __prompt_command() {
     PS1="\t \u@\h:\[${color_cwd}\]\w\[${COLOR_OFF}\]"
 
     # Getting cursor position causes issue when IDE executes command in new terminal
-    if [[ -n "${__PC_SEEN-}"  ]]; then
+    if [[ "$_IS_IDE_TERMINAL" == "0" || -n "${__PC_SEEN-}" ]]; then
       local COL
       local ROW
       IFS=';' read -sdR -p $'\E[6n' ROW COL
