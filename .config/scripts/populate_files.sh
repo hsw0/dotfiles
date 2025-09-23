@@ -20,15 +20,16 @@ PRIVATE_FILES=()
 
 CACHE_DIRS+=(vim/{undo,swap,backup})
 CACHE_DIRS+=(gradle)
-CACHE_DIRS+=(maven/repositories)
+CACHE_DIRS+=(m2/repository)
 CACHE_DIRS+=(terraform/plugins)
 
-PRIVATE_FILES=(.{sh,bash}_history)
-PRIVATE_FILES=(.python_history)
-PRIVATE_FILES=(.lesshst)
+PRIVATE_FILES+=(.{bash,zsh}_history)
+PRIVATE_FILES+=(.{psql,sqlite}_history)
+PRIVATE_FILES+=(.python_history)
+PRIVATE_FILES+=(.lesshst)
 
 PRIVATE_DIRS+=($XDG_CONFIG_HOME/gnupg)
-PRIVATE_FILES=($XDG_CONFIG_HOME/gnupg/*.{conf,gpg,kbx} $XDG_CONFIG_HOME/gnupg/S.*)
+PRIVATE_FILES+=($XDG_CONFIG_HOME/gnupg/*.{conf,gpg,kbx} $XDG_CONFIG_HOME/gnupg/S.*)
 
 for path in "${CACHE_DIRS[@]}" ; do
  [[ -d "$path" ]] && continue
@@ -41,7 +42,7 @@ done
 
 for path in "${PRIVATE_FILES[@]}" ; do
  mkdir -p "$(dirname $path)"
- chmod 600 "$path"
+ chmod 600 "$path" || true
 done
 
 

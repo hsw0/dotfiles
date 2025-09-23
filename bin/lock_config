@@ -5,7 +5,7 @@
 
 set -eu
 
-if [[ shell_is_osx ]]; then
+if [[ "$OSTYPE" == *'darwin'* ]]; then
  lock_cmd="chflags -v uimmutable"
  unlock_cmd="chflags -v nouimmutable"
 else
