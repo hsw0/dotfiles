@@ -123,13 +123,17 @@ __print_errcode() {
     local status=$?
     local color=$'\e[0;33m'
     echo -e "${color}code $status$COLOR_OFF"
+
+    tput cnorm  # Turn on cursor
+    tput sgr0  # Reset attributes
 }
 trap __print_errcode ERR
 
 _termfix() {
     stty sane
     tput init
-    tput cnorm  # Turn on cursor
+    tput sgr0
+    tput cnorm
     #tput rmcup  # Switch back to primary page
 }
 
