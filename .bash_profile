@@ -13,7 +13,6 @@ export LC_NUMERIC=ko_KR.UTF-8
 export LC_MONETARY=ko_KR.UTF-8
 unset LC_ALL
 
-
 # XDG Base Directory Specification: https://specifications.freedesktop.org/basedir-spec/0.8/ar01s03.html
 export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
 export XDG_DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"
@@ -22,12 +21,7 @@ export XDG_CACHE_HOME="${XDG_CACHE_HOME:-$HOME/.cache}"
 
 export PYTHONPYCACHEPREFIX="${PYTHONPYCACHEPREFIX:-$XDG_CACHE_HOME/python}"
 
-[[ -d "$HOME/bin" && ! "$PATH" =~ "$HOME/bin" ]] &&
-    PATH="$HOME/bin:$PATH"
-[[ -d "$HOME/.local/bin" && ! "$PATH" =~ "$HOME/.local/bin" ]] &&
-    PATH="$HOME/.local/bin:$PATH"
-[[ -d "$HOME/.cargo/bin" && ! "$PATH" =~ "$HOME/.cargo/bin" ]] &&
-    PATH="$HOME/.cargo/bin:$PATH"
+export DOTNET_CLI_TELEMETRY_OPTOUT=1
 
 [[ -f ~/.bashrc ]] && . ~/.bashrc
 
@@ -58,7 +52,14 @@ else
     export TIME_STYLE=long-iso
 fi
 
-export DOTNET_CLI_TELEMETRY_OPTOUT=1
+[[ -d "$HOME/.cargo/bin" && ! "$PATH" =~ "$HOME/.cargo/bin" ]] &&
+    PATH="$HOME/.cargo/bin:$PATH"
+
+[[ -d "$HOME/bin" && ! "$PATH" =~ "$HOME/bin" ]] &&
+    PATH="$HOME/bin:$PATH"
+
+[[ -d "$HOME/.local/bin" && ! "$PATH" =~ "$HOME/.local/bin" ]] &&
+    PATH="$HOME/.local/bin:$PATH"
 
 umask 0022
 
