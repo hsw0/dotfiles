@@ -1,8 +1,7 @@
 [include]
-	path = ~/.gitconfig.local
+	path = ~/.config/git/config.local
 
 [core]
-	excludesfile = ~/.gitignore_global
 	quotepath = false
 	autocrlf = input
 
